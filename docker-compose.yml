@@ -1,0 +1,24 @@
+services:
+  openclaw:
+    image: ghcr.io/openclaw/openclaw:latest
+    container_name: openclaw
+    restart: unless-stopped
+    ports:
+      - "18789:18789"
+    environment:
+      - TZ=Asia/Shanghai
+      - NODE_OPTIONS=--max-old-space-size=768
+      - OPENCLAW_BASE_URL=http://146.190.86.175:18789
+      - OPENCLAW_GATEWAY_SECRET=59031c068b362deffae7070c96e35f9fa6a68d15446fe704a8c2c158c5954270
+      - SILICONFLOW_API_KEY=sk-iobpmbzxtuynphfswpnzsuluhnwdtkfggzumfrnfblygafzs
+      - DEFAULT_MODEL=siliconflow/deepseek-ai/DeepSeek-V2.5
+      - DISCORD_BOT_TOKEN=MTQ5MTMzNzY5MzE2NDk5ODY4Ng.GCBNZj.mEDW6HJdptoZJ-AugJHcQuP8kLRfGplfGPk6eA
+      - DISCORD_CHANNEL_ID=1491337034332377180
+    volumes:
+      - ./data:/app/data
+      - ./config:/app/config
+    logging:
+      driver: "json-file"
+      options:
+        max-size: "10m"
+        max-file: "3"
